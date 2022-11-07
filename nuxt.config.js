@@ -5,6 +5,12 @@ export default {
     host: '0',
     port: process.env.APP_PORT
   },
+  css: ['~/assets/css/main.css'],
+  loading: {
+    color: 'DodgerBlue',
+    height: '3px'
+  },
+  // loading: '~/components/LoadingBar.vue',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Sabers',
@@ -22,10 +28,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

@@ -34,7 +34,7 @@ export default {
     const post = await $axios
       .$get("/posts", {
         params: {
-          slug: params.slug,
+          slug: params.post,
         },
       })
       .then((r) => {

@@ -4,7 +4,7 @@
       <v-col cols="8">
         <h1 style="text-align: center;">{{post.title.rendered}}</h1>
         <span>
-          {{this.$date(post.date)}}|by{{post.yoast_head_json.author}}
+          {{$date(post.date)}}|by{{post.yoast_head_json.author}}
         </span>
         <figure>
           <img
