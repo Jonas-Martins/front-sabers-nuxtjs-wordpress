@@ -8,7 +8,9 @@ export default {
   css: ['~/assets/css/main.css'],
   loading: {
     color: 'DodgerBlue',
-    height: '3px'
+    height: '3px',
+    duration: 3000,
+    continuous: true
   },
   // loading: '~/components/LoadingBar.vue',
   // Global page headers: https://go.nuxtjs.dev/config-head

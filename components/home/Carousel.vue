@@ -54,7 +54,7 @@
             <div class="d-flex" style="width: 95vw">
               <v-slide-group>
                 <TransitionGroup
-                  name="list"
+                  name="card"
                   tag="div"
                   class="v-slide-group__content"
                 >
@@ -193,8 +193,8 @@ export default {
 </script>
 
 <style>
-.list-move {
-  transition: all 1s ease;
+.card-move{
+  transition: all 1.3s ease!important;
 }
 
 .v-list-item__title,
