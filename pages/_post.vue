@@ -1,9 +1,11 @@
 <template>
   <div>
-    <template v-if="this.post.length > 0">
+    <template v-if="post.length > 0">
       <PostStructure
-        :post="this.post[0]"
+        :post="post[0]"
+        :categories="categories"
         :featuredMedia="featuredMedia"
+        :lastPosts="lastPosts"
       ></PostStructure>
     </template>
     <template v-else> Página não encontrada </template>
@@ -55,6 +57,35 @@ export default {
             })
         : "";
 
+    const categories =
+      post.length > 0
+        ? await $axios
+            .$get(`/categories/`, {
+              params: {
+                post: post[0].id,
+              },
+            })
+            .then((r) => {
+              return r;
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        : "";
+
+    const lastPosts = await $axios
+      .$get("/posts", {
+        params: {
+          per_page: 5,
+        },
+      })
+      .then((r) => {
+        return r;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     // const author = await $axios
     //   .$get(`/users/${post[0].author}`)
     //   .then((r) => {
@@ -65,7 +96,7 @@ export default {
     //     console.log(err);
     //   });
 
-    return { post, featuredMedia };
+    return { post, featuredMedia, categories, lastPosts };
   },
 };
 </script>

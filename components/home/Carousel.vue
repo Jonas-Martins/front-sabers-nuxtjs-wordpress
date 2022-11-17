@@ -1,12 +1,12 @@
 <template>
-  <v-container fluid style="height: 100vh; position: relative">
+  <v-container fluid style="position: relative">
     <v-row v-if="posts.length > 0" style="position: relative">
       <v-col class="pa-0">
         <v-img
           height="100vh"
           eager
           :src="slideInfo.jetpack_featured_media_url"
-          gradient="to top right, rgba(0,0,0,.20), rgba(0,0,0,.7)"
+          gradient="to top right, rgba(0,0,0,.50), rgba(0,0,0,.7)"
         ></v-img>
       </v-col>
       <v-col
@@ -14,12 +14,16 @@
         class="d-flex align-end pa-0"
       >
         <v-row no-gutters>
-          <v-col cols="12" class="pl-14" align-self="center">
+          <v-col
+            cols="12"
+            :class="this.$vuetify.breakpoint.smAndDown ? 'px-1' : 'px-16'"
+            align-self="center"
+          >
             <v-list-item three-line class="pa-0">
               <v-list-item-content>
                 <v-list-item-action class="my-2">
                   <v-progress-linear
-                    style="width: 5%"
+                    style="width: 3%"
                     color="white"
                     rounded
                     value="100"
@@ -28,12 +32,19 @@
                 <v-list-item-subtitle style="font-size: 15px">{{
                   $date(slideInfo.date)
                 }}</v-list-item-subtitle>
-                <b style="font-size: 45px; color: white">{{
-                  slideInfo.title.rendered
-                }}</b>
-                <v-list-item-subtitle style="font-size: 13px">{{
-                  slideInfo.yoast_head_json.description
-                }}</v-list-item-subtitle>
+                <b
+                  style="color: white"
+                  :style="{
+                    fontSize: this.$vuetify.breakpoint.smAndDown
+                      ? '30px'
+                      : '40px',
+                  }"
+                  v-html="slideInfo.title.rendered"
+                ></b>
+                <v-list-item-subtitle
+                  style="font-size: 13px"
+                  v-html="slideInfo.yoast_head_json.description"
+                ></v-list-item-subtitle>
                 <v-list-item-action class="mx-0">
                   <v-btn
                     :to="`${slideInfo.slug}`"
@@ -50,8 +61,8 @@
               </v-list-item-content>
             </v-list-item>
           </v-col>
-          <v-col cols="12" class="d-flex flex-wrap align-content-end pb-4 px-8">
-            <div class="d-flex" style="width: 95vw">
+          <v-col cols="12" class="d-flex flex-wrap align-content-end pb-4">
+            <div class="d-flex" style="width: 100vw">
               <v-slide-group>
                 <TransitionGroup
                   name="card"
@@ -60,9 +71,9 @@
                 >
                   <v-slide-item v-for="(post, i) in posts" :key="post.id">
                     <v-card
-                      width="200"
-                      height="200"
-                      class="ma-3"
+                      :width="$vuetify.breakpoint.smAndDown ? '150' : '200'"
+                      :height="$vuetify.breakpoint.smAndDown ? '150' : '200'"
+                      class="ml-3 mb-3"
                       :to="`${post.slug}`"
                       nuxt
                       :style="{ zIndex: slideOrdem - i + 999 }"
@@ -71,20 +82,27 @@
                         height="100%"
                         :src="post.jetpack_featured_media_url"
                         class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                        gradient="to bottom, rgba(0,0,0,.20), rgba(0,0,0,.85)"
                       >
-                        <v-card-subtitle class="pb-0" style="font-size: 12px">{{
-                          $date(post.date)
-                        }}</v-card-subtitle>
+                        <v-card-subtitle
+                          class="pb-0"
+                          :style="{
+                            fontSize: $vuetify.breakpoint.smAndDown
+                              ? '10px'
+                              : '12px',
+                          }"
+                          >{{ $date(post.date) }}</v-card-subtitle
+                        >
                         <v-card-title
                           class="pt-0"
-                          style="
-                            word-break: normal;
-                            line-height: 100%;
-                            font-size: 17px;
-                          "
-                          >{{ post.title.rendered }}</v-card-title
-                        >
+                          style="word-break: normal; line-height: 100%"
+                          :style="{
+                            fontSize: $vuetify.breakpoint.smAndDown
+                              ? '13px'
+                              : '17px',
+                          }"
+                          v-html="post.title.rendered"
+                        ></v-card-title>
                       </v-img>
                     </v-card>
                   </v-slide-item>
@@ -97,7 +115,7 @@
                 outlined
                 icon
                 color="white"
-                x-large
+                :large="this.$vuetify.breakpoint.mdAndUp"
                 class="ml-5"
                 ><v-icon>mdi-chevron-left</v-icon></v-btn
               >
@@ -106,7 +124,7 @@
                 outlined
                 icon
                 color="white"
-                x-large
+                :large="this.$vuetify.breakpoint.mdAndUp"
                 class="mx-5"
                 ><v-icon>mdi-chevron-right</v-icon></v-btn
               >
@@ -116,7 +134,15 @@
                 rounded
                 :value="slideOrdem * 8.34"
               ></v-progress-linear>
-              <b class="mx-5" style="color: white; font-size: 40px">
+              <b
+                class="mx-5"
+                style="color: white"
+                :style="{
+                  fontSize: this.$vuetify.breakpoint.smAndDown
+                    ? '30px'
+                    : '40px',
+                }"
+              >
                 {{ slideOrdem }}
               </b>
             </div>
@@ -179,7 +205,7 @@ export default {
         if (that.slideOrdem > that.posts.length) {
           that.slideOrdem = 1;
         }
-      }, 5000);
+      }, 6500);
     },
   },
   mounted() {
@@ -193,8 +219,8 @@ export default {
 </script>
 
 <style>
-.card-move{
-  transition: all 1.3s ease!important;
+.card-move {
+  transition: all 1.3s ease !important;
 }
 
 .v-list-item__title,

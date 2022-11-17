@@ -8,7 +8,7 @@ export default {
   css: ['~/assets/css/main.css'],
   loading: {
     color: 'DodgerBlue',
-    height: '3px',
+    height: '2.5px',
     duration: 3000,
     continuous: true
   },
