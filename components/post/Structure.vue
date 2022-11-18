@@ -84,7 +84,6 @@
                       :to="`${lastPost.slug}`"
                       class="mb-3"
                       nuxt
-                      :style="{ zIndex: slideOrdem - i + 999 }"
                       v-if="lastPost.id != post.id"
                     >
                       <v-img
@@ -110,7 +109,7 @@
                               ? '13px'
                               : '17px',
                           }"
-                          v-html="post.title.rendered"
+                          v-html="lastPost.title.rendered"
                         ></v-card-title>
                       </v-img>
                     </v-card>

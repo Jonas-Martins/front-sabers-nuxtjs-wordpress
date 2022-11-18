@@ -218,23 +218,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card-move {
   transition: all 1.3s ease !important;
 }
 
-.v-list-item__title,
-.v-list-item__subtitle {
+::v-deep .v-list-item__title,
+::v-deep .v-list-item__subtitle {
   color: white !important;
 }
-.v-slide-group__next {
+::v-deep .v-slide-group__next {
   display: none !important;
 }
-.v-slide-group__prev {
+::v-deep .v-slide-group__prev {
   display: none !important;
 }
 
-.v-slide-group__content {
+::v-deep .v-slide-group__content {
   align-items: flex-end;
   justify-content: flex-end;
 }
