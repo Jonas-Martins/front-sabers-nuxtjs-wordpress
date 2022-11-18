@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-img
-      height="400"
+      :height="this.$vuetify.breakpoint.smAndDown ? 'auto' : '380px'"
       gradient="to top right, rgba(0,0,0,.33), rgba(0,0,0,.75)"
       :src="categories[0].yoast_head_json.og_image[0].url"
     >
@@ -11,8 +11,8 @@
             <h2 v-html="categories[0].name"></h2>
             <h5>Não deixe de ver também</h5>
           </v-col>
-          <v-col cols="6" class="d-flex justify-end">
-            <v-btn light rounded><b>Mais {{categories[0].name}}</b></v-btn>
+          <v-col align-self="center" cols="6" class="d-flex justify-end">
+            <v-btn nuxt :to="`category/${categories[0].slug}`" :x-small="this.$vuetify.breakpoint.smAndDown" light rounded><b>Mais {{categories[0].name}}</b></v-btn>
           </v-col>
           <v-row>
             

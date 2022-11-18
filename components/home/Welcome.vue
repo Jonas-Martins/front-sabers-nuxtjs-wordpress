@@ -4,7 +4,7 @@
       <v-col cols="12">
         <h2>Bem-vindo à SABERS.com</h2>
       </v-col>
-      <v-col class="pt-0" cols="6">
+      <v-col class="pt-0" cols="12" md="6">
         <v-card height="100%" width="100%" :to="`${postsWelcome[0].slug}`" nuxt>
           <v-img
             height="100%"
@@ -30,7 +30,7 @@
           </v-img>
         </v-card>
       </v-col>
-      <v-col class="pt-0" cols="6">
+      <v-col class="pt-0" cols="12" md="6">
         <v-row>
           <template v-for="(post, i) in postsWelcome">
             <v-col cols="6" v-if="i" :key="post.id">

@@ -34,8 +34,8 @@
                 <v-list-item-title>Início</v-list-item-title>
               </v-list-item>
 
-              <v-list-item nuxt to="/m">
-                <v-list-item-title>Mais lidas</v-list-item-title>
+              <v-list-item nuxt to="/category">
+                <v-list-item-title>Categorias</v-list-item-title>
               </v-list-item>
 
               <v-list-item nuxt to="/n">
@@ -46,8 +46,8 @@
                 <v-list-item-title>Contato</v-list-item-title>
               </v-list-item>
 
-              <v-list-item class="mt-16">
-                <v-list-item-title @click="dialog = !dialog"
+              <v-list-item @click="dialog = !dialog" class="mt-16">
+                <v-list-item-title
                   >Pesquisar</v-list-item-title
                 >
               </v-list-item>
@@ -84,8 +84,8 @@
         <v-btn rounded :dark="absolute" class="ml-3" text outlined nuxt to="/">
           Inicio
         </v-btn>
-        <v-btn rounded :dark="absolute" class="ml-3" text outlined nuxt to="/"
-          >Mais Lidas</v-btn
+        <v-btn rounded :dark="absolute" class="ml-3" text outlined nuxt to="/category"
+          >Categorias</v-btn
         >
         <v-btn rounded :dark="absolute" class="ml-3" text outlined nuxt to="/">
           Novidades
@@ -132,6 +132,7 @@
           >
             <v-text-field
               label="Pesquisar"
+              v-model="search"
               solo
               append-icon="mdi-magnify"
               rounded
@@ -141,7 +142,8 @@
               height="60"
               dense
               outlined
-              @click:append="true"
+              @click:append="searchClick"
+              @keyup.enter="searchClick"
             ></v-text-field>
           </div>
         </div>
@@ -177,12 +179,19 @@ export default {
       dialog: false,
       drawer: false,
       group: null,
+
+      search: '',
     };
   },
   methods: {
     themeDarkLight() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     },
+    searchClick(){
+      this.$nuxt.$options.router.push(`/search/${this.search}`)
+      this.search = '',
+      this.dialog = false
+    }
   },
   watch: {
     group() {
